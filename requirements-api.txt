@@ -3,7 +3,7 @@ fastapi
 uvicorn
 python-multipart
 sqlalchemy
-psycopg2-binary
+psycopg[binary]
 pydantic
 email-validator
 pwdlib[argon2]
