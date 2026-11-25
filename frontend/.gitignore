@@ -1,0 +1,15 @@
+@'
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+node_modules/
+frontend/dist/
+data/
+uploads/
+storage/
+*.log
+'@ | Set-Content -Encoding UTF8 .gitignore
