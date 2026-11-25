@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+python-multipart
+sqlalchemy
+psycopg2-binary
+psycopg[binary]
+pydantic
+email-validator
+pwdlib[argon2]
+python-jose[cryptography]
+qdrant-client
+sentence-transformers
+pymupdf
+pytesseract
+pypdf
+python-docx
+Pillow
