@@ -2,6 +2,10 @@
 .env.*
 !.env.example
 
+# Local agent skills
+.agents/skills/
+.codex/skills/
+
 .venv/
 venv/
 __pycache__/
