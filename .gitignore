@@ -15,3 +15,6 @@ uploads/
 storage/
 
 *.log
+
+.agents/
+skills-lock.json
