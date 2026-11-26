@@ -7,7 +7,7 @@ from sqlalchemy.orm import declarative_base, sessionmaker
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
-    DATABASE_URL = "postgresql+psycopg://raguser:ragpassword@postgres:5432/ragstudio"
+    raise RuntimeError("DATABASE_URL environment variable is not set")
 
 # Render and other hosts may provide the legacy postgres:// scheme. Normalize
 # every PostgreSQL URL to the psycopg 3 driver installed by requirements-api.txt.
@@ -17,7 +17,7 @@ if DATABASE_URL.startswith("postgres://"):
 database_url = make_url(DATABASE_URL)
 if (
     database_url.get_backend_name() == "postgresql"
-    and database_url.get_driver_name() != "psycopg"
+    and database_url.drivername != "postgresql+psycopg"
 ):
     database_url = database_url.set(drivername="postgresql+psycopg")
 
@@ -29,8 +29,9 @@ if database_url.username and "yourprojectref" in database_url.username.lower():
 
 DATABASE_URL = database_url
 
-# Supabase requires TLS. Keep local Docker PostgreSQL on its normal non-TLS default.
-default_sslmode = "require" if (database_url.host or "").endswith("supabase.com") else "disable"
+# Require TLS for remote databases while keeping local Docker PostgreSQL usable.
+local_hosts = {"postgres", "localhost", "127.0.0.1", "::1"}
+default_sslmode = "disable" if (database_url.host or "").lower() in local_hosts else "require"
 DB_SSLMODE = os.getenv("DB_SSLMODE", database_url.query.get("sslmode", default_sslmode))
 
 engine = create_engine(
