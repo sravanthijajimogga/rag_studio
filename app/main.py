@@ -74,8 +74,8 @@ MAX_FILE_SIZE = 10 * 1024 * 1024
 UPLOAD_DIR = os.getenv("UPLOAD_DIR", "/app/uploads")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-QDRANT_URL = os.getenv("QDRANT_URL", "http://qdrant:6333")
-QDRANT_API_KEY = os.getenv("QDRANT_API_KEY")
+QDRANT_URL = os.getenv("QDRANT_URL", "http://qdrant:6333").strip()
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY", "").strip() or None
 
 client = QdrantClient(
     url=QDRANT_URL,

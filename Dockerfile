@@ -12,7 +12,8 @@ RUN apt-get update && \
 # Install Python dependencies
 COPY requirements-api.txt .
 
-RUN pip install --no-cache-dir -r requirements-api.txt
+RUN pip install --no-cache-dir -r requirements-api.txt \
+    && python -c "import psycopg"
 
 # Copy application
 COPY app ./app

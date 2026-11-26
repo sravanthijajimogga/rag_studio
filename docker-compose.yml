@@ -11,7 +11,7 @@ services:
       QDRANT_URL: "http://qdrant:6333"
       HF_HOME: "/root/.cache/huggingface"
       UPLOAD_DIR: "/app/uploads"
-      DATABASE_URL: "postgresql+psycopg2://raguser:ragpassword@postgres:5432/ragstudio"
+      DATABASE_URL: "postgresql+psycopg://raguser:ragpassword@postgres:5432/ragstudio"
       JWT_SECRET_KEY: "${JWT_SECRET_KEY:?Set JWT_SECRET_KEY in .env}"
       LEGACY_OWNER_ID: "2"
     volumes:
